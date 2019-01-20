@@ -5,7 +5,7 @@ class User(object):
 # dictionary for books and their rating
         self.books = {}
 
-    def get_email(self):
+    def get_email(self, name):
         return self.email
 
     def change_email(self, address):
@@ -49,7 +49,7 @@ class Book(object):
         return self.isbn
 
     def set_isbn(self, isbn):
-        self.isbn = self.isbn
+        self.isbn = isbn
         print("This book's ISBN has been updated.")
 
     def add_rating(self, rating):
@@ -122,7 +122,7 @@ class TomeRater(object):
         self.book = book
         self.email = email
         self.rating = rating
-        getattr(self.users, email, "No user with email {email}".format(email=self.email))
+        getattr(self.users, "email", "No user with email {email}".format(email=self.email))
         self.email = User.read_book(self.book, self.rating)
         self.book = add_rating(self.rating)
         if hasattr(self.books, self.book):
@@ -133,6 +133,7 @@ class TomeRater(object):
     def add_user(self, name, email, user_books=None):
         self.name = name
         self.email = email
+        self.user_books = user_books
         new_user = User(self.name, self.email)
         if user_books != None:
             for book in self.user_books:
